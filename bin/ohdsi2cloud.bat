@@ -23,9 +23,9 @@ GOTO usage
 
 :kubernetes-deploy
 kompose -f %DOCKER_COMPOSE_FILE% up
-REM kubectl delete services broadsea-methods-library
+kubectl delete services broadsea-methods-library
 kubectl expose deployment broadsea-methods-library --type=LoadBalancer --port 8787
-REM kubectl delete services broadsea-webtools
+kubectl delete services broadsea-webtools
 kubectl expose deployment broadsea-webtools --type=LoadBalancer --port 8080
 GOTO end
 
