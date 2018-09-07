@@ -62,10 +62,6 @@ gcloud docker -- push gcr.io/%GCP_OHDSI_PROJECT_ID%/broadsea-methodslibrary:v1
 REM gcloud docker -- push gcr.io/%GCP_OHDSI_PROJECT_ID%/achilles:v1.6.0
 GOTO end
 
-:install-docker-compose
-install-docker-compose.sh
-GOTO end
-
 :version
 echo Version 0.1.0 (Requires gcloud installed with established credentials, kubectl installed with an established context, kompose (https://github.com/kubernetes-incubator/kompose) on PATH).
 GOTO end
