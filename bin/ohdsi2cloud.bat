@@ -1,6 +1,6 @@
 @echo off
 setlocal
-SET YML_DIR%=..\postgresql
+SET YML_DIR=C:\Users\taa7016\Documents\GitHub\Broadsea\postgresql
 SET DOCKER_COMPOSE_FILE=%YML_DIR%\docker-compose-aou-postgres.yml
 SET GCP_OHDSI_PROJECT_ID="$(gcloud config get-value project)"
 IF ""%~1"" == ""up"" GOTO kubernetes-deploy
@@ -38,17 +38,11 @@ ssh curation-analysis-instance-1.us-central1-a.all-of-us-ehr-dev
 docker-compose -f docker-compose-aou.yml up -d
 
 :compute-down
-echo Coming soon!
+echo Deprecated!
 
 :convert
 kompose -f DOCKER_COMPOSE_FILE convert
 GOTO end
-
-:create-sql-users
-REM User created using Cloud SQL have the privileges associated with the cloudsqlsuperuser role. The host parameter is ignored; provide any non-empty string. See https://cloud.google.com/sql/docs/postgres/create-manage-users
-gcloud sql users create ohdsi_admin_user --instance=ohdsi-synpuf 35.190.145.59 --password=app1
-gcloud sql users create ohdsi_app_user --instance=ohdsi-synpuf 35.190.145.59 --password=app1
-GOTO END
 
 :test
 SET ATLAS_DEFAULT_PORT=8080
@@ -92,6 +86,10 @@ GOTO end
 :install-docker-compose
 install-docker-compose.sh
 GOTO end
+
+:create-sql-users
+createCloudSqlUsers.bat
+GOTO END
 
 :version
 echo Version 0.1.0 (Requires gcloud installed with established credentials, kubectl installed with an established context, kompose (https://github.com/kubernetes-incubator/kompose) on PATH).
