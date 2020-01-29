@@ -14,13 +14,23 @@ pipeline {
             steps {
                 //junit 'reports/**/*.xml'
                 echo 'Test'
-                sh 'testAtlas.sh'
+                //sh './testAtlas.sh'
             }
+        }
+        stage('Sanity check') {
+             steps {
+                input "Does the staging environment look ok?"
+             }
+        }
+        stage('Deliver') {
+             steps {
+                //sh './jenkins/scripts/deliver.sh'
+             }
         }
         stage('Deploy') {
             steps {
-                //sh 'make publish'
-                sh 'docker-compose up -d'
+                // './deploy production'
+                //sh 'docker-compose up -d'
                 echo 'Deploy'
             }
         }
