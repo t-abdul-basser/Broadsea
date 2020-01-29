@@ -2,14 +2,8 @@ version: '2'
 
 services:
 
-  broadsea-methods-library:
-    image: ohdsi/broadsea-methodslibrary
-    ports:
-      - "8787:8787"
-      - "6311:6311"
-
   broadsea-webtools:
-    image: ohdsi/broadsea-webtools
+    image: cumc-dbmi/broadsea-webtools
     ports:
       - "8080:8080"
     volumes:
